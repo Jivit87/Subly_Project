@@ -20,7 +20,7 @@ A modern web application that automatically generates and overlays captions on v
 Subly/
 ├── frontend/          # React frontend application
 ├── backend/           # Node.js API server
-├── remotion/          # Remotion video rendering
+├── remotion/       # Remotion video rendering
 └── README.md
 ```
 
@@ -209,8 +209,8 @@ VITE_API_URL=http://localhost:3001
 
 ## 📞 Support
 
-For support, email [jivit.rana2024@nst.rishihood.edu.in] or create an issue in the repository.
+For support, email jivit.rana2024@nst.rishihood.edu.in or create an issue in the repository.
 
 ---
 
-**Made with ❤️ by [Jivit Rana]**
+**Made with ❤️ by Jivit Rana**
