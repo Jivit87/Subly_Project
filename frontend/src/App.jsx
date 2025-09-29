@@ -118,8 +118,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background py-8">
-      <div className="max-w-4xl mx-auto px-4 flex flex-col space-y-8">
-        {/* Header */}
+      <div className="max-w-6xl mx-auto px-4 flex flex-col space-y-8">
         <div className="flex justify-center lg:justify-start items-center mb-4">
           <div className="flex items-center gap-3">
             <Video className="h-8 w-8 text-primary" />
@@ -129,9 +128,7 @@ function App() {
           </div>
         </div>
 
-        {/* Upload & Actions */}
-        <div className="flex flex-col space-y-6 w-full">
-          {/* Upload Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
           <Card className="w-full">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 justify-center">
@@ -147,8 +144,27 @@ function App() {
             </CardContent>
           </Card>
 
-          {/* Style Selector */}
-          {videoFile && (
+          {previewUrl && (
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>Preview</CardTitle>
+                <CardDescription>
+                  See how your captions will look on the video
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CaptionPreview
+                  videoUrl={previewUrl}
+                  captions={captions}
+                  style={selectedStyle}
+                />
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        {videoFile && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Caption Style</CardTitle>
@@ -163,10 +179,7 @@ function App() {
                 />
               </CardContent>
             </Card>
-          )}
 
-          {/* Actions */}
-          {videoFile && (
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Actions</CardTitle>
@@ -174,60 +187,43 @@ function App() {
                   Generate captions and export your video
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex flex-col gap-4">
-                <Button
-                  onClick={generateCaptions}
-                  disabled={isProcessing}
-                  className="w-full h-14 text-lg font-semibold bg-black text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 disabled:transform-none disabled:shadow-md"
-                  size="lg"
-                >
-                  <Zap className="mr-3 h-5 w-5" />
-                  {isProcessing ? "Generating Captions..." : "Auto-generate Captions"}
-                </Button>
-
-                {captions.length > 0 && (
+              <CardContent>
+                <div className="flex flex-col gap-4">
                   <Button
-                    onClick={exportVideo}
+                    onClick={generateCaptions}
                     disabled={isProcessing}
-                    className="w-full h-14 text-lg font-semibold bg-black text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 disabled:transform-none disabled:shadow-md"
+                    className="w-full h-14 text-lg font-semibold bg-black hover:bg-gray-800 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 disabled:transform-none disabled:shadow-md disabled:bg-gray-400 disabled:hover:bg-gray-400"
                     size="lg"
                   >
-                    <Download className="mr-3 h-5 w-5" />
-                    {isProcessing ? "Exporting..." : "Export Video"}
+                    <Zap className="mr-3 h-5 w-5" />
+                    {isProcessing ? "Generating Captions..." : "Auto-generate Captions"}
                   </Button>
-                )}
 
-                {isProcessing && (
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Processing...</span>
-                      <span>Please wait</span>
+                  {captions.length > 0 && (
+                    <Button
+                      onClick={exportVideo}
+                      disabled={isProcessing}
+                      className="w-full h-14 text-lg font-semibold bg-black hover:bg-gray-800 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 disabled:transform-none disabled:shadow-md disabled:bg-gray-400 disabled:hover:bg-gray-400"
+                      size="lg"
+                    >
+                      <Download className="mr-3 h-5 w-5" />
+                      {isProcessing ? "Exporting..." : "Export Video"}
+                    </Button>
+                  )}
+
+                  {isProcessing && (
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Processing...</span>
+                        <span>Please wait</span>
+                      </div>
+                      <Progress value={75} className="w-full" />
                     </div>
-                    <Progress value={75} className="w-full" />
-                  </div>
-                )}
+                  )}
+                </div>
               </CardContent>
             </Card>
-          )}
-        </div>
-
-        {/* Preview */}
-        {previewUrl && (
-          <Card className="w-full">
-            <CardHeader>
-              <CardTitle>Preview</CardTitle>
-              <CardDescription>
-                See how your captions will look on the video
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CaptionPreview
-                videoUrl={previewUrl}
-                captions={captions}
-                style={selectedStyle}
-              />
-            </CardContent>
-          </Card>
+          </div>
         )}
       </div>
 
