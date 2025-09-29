@@ -103,3 +103,13 @@ ehthumbs.db
 
 # Remotion specific
 .remotion-*
+.remotion/
+
+# Chrome headless shell (large binary)
+chrome-headless-shell*
+**/chrome-headless-shell/**
+
+# Large binary files
+*.bin
+*.exe
+ffmpeg

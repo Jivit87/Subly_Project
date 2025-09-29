@@ -57,3 +57,18 @@ outputs/
 *.tar.gz
 *.rar
 *.7z
+
+# Large binary files and executables
+whisper-main/
+*.bin
+*.exe
+chrome-headless-shell*
+ffmpeg
+*.so
+*.dylib
+*.dll
+
+# Whisper model files
+*.pt
+*.ggml
+*.model
